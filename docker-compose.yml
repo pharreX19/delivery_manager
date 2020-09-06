@@ -1,0 +1,52 @@
+version: '3'
+services:
+    cell_tech_webserver:
+        image: nginx
+        container_name: cell_tech_webserver
+        restart: unless-stopped
+        tty: true
+        ports: 
+            - "8000:80"
+            - "4000:443"
+        networks:
+            - app_network
+        volumes: 
+            - ./:/var/www
+            - ./nginx/conf.d/:/etc/nginx/conf.d
+
+    cell_tech_db:
+        image: mysql:5.7
+        container_name: 'cell_tech_db'
+        restart: unless-stopped
+        # command: --default-authentication-plugin=mysql_native_password
+        ports: 
+            - "30006:3306"
+        tty: true
+        environment: 
+            MYSQL_DATABASE: cell_tech_delivery
+            MYSQL_USERNAME: cell_tech
+            MYSQL_PASSWORD: cell_tech
+            MYSQL_ROOT_PASSWORD: pa55w.rd
+            SERVICE_NAME: mysql
+            SERVICE_TAGS: dev
+        networks:
+            - app_network
+
+    php:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        container_name: cell_tech_app
+        restart: always
+        tty: true
+        working_dir: /var/www
+        volumes: 
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./:/var/www
+        networks:
+            - app_network
+
+networks:
+    app_network:
+        driver: bridge
+    
