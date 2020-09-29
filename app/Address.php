@@ -21,8 +21,14 @@ class Address extends Model
         'order_id'
     ];
 
-    public function customer() : HasMany{
-        return $this->hasMany(Customer::class);
+    public function customer() : BelongsToMany{
+        return $this->BelongsToMany(Customer::class, 'address_customers')->withPivot('id')->withTimestamps();
+        // return $this->BelongsToMany(Customer::class)->withPivot('order_id')->as('orders')->withTimestamps();
+    }
+
+    public function orders() : HasManyThrough
+    {
+        return $this->hasManyThrough(Order::class, AddressCustomer::class);
     }
 
     // public function orders() : HasMany

@@ -38,12 +38,12 @@ class CustomerUpdateRequest extends FormRequest
                 'max:20',
                 'min:7',
             ],
-            'address_id' => [
-                'numeric',
-                'exists:addresses,id',
-                'sometimes',
-                'nullable',
-            ]
+            // 'address_id' => [
+            //     'numeric',
+            //     'exists:addresses,id',
+            //     'sometimes',
+            //     'nullable',
+            // ]
         ];
     }
 }

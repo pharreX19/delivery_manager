@@ -19,12 +19,12 @@ class ItemDataImportController extends Controller
         
         try {
 
-            Excel::import(new ItemDataImport, request()->file('select_file'));
-            return response()->json('Data uploaded Successfully');
+            $data = Excel::import(new ItemDataImport, request()->file('select_file'));
+            return response()->json(['success_message' => 'Data uploaded Successfully', 'data' => $data],);
 
-        } catch (Exception $e) {
-
-            return response()->json('Data failed to Upload');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            
+            return response()->json(['failure_message' => 'Data failed to Upload', 'errors'=> $e->failures()]);
 
         }
     }

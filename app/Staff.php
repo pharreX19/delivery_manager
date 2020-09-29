@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -20,7 +21,7 @@ class Staff extends Model
         'store_id'
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'joined_at'];
 
     protected $table = 'staff';
 
@@ -38,6 +39,15 @@ class Staff extends Model
         static::addGlobalScope('store', function(Builder $builder){
             $builder->where('store_id', Auth::user()->store_id );
         });
+
+        static::creating(function ($query) {
+            $query->store_id = Auth::user()->store_id;
+        });
+
+    }
+
+    public function getJoinedAtAttribute($value){
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
 }

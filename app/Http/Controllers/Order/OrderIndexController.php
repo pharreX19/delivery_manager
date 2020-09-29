@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class OrderIndexController extends Controller
 {
     protected $allowedIncludes = ['address'];
-    protected $allowedFilters = ['status_id'];
+    protected $allowedFilters = ['status_id', 'orderCustomer.customer.name','orderCustomer.customer.contact_no'];
     protected $allowedSorts = ['created_at', 'id'];
 
 

@@ -11,6 +11,6 @@ $factory->define(Customer::class, function (Faker $faker) {
     return [
         'name'=>$faker->name,
         'contact_no'=>$faker->phoneNumber,
-        'address_id'=> Address::all()->random()->id,
+        // 'address_id'=> Address::all()->random()->id,
     ];
 });

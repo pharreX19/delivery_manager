@@ -13,6 +13,6 @@ class AddressIndexController extends Controller
     protected $allowedSorts = ['created_at', 'id'];
 
     public function __invoke(){
-        return $this->paginatedResponse((new AddressIndexService($this->allowedIncludes, $this->allowedFilters, $this->allowedSorts))->execute());
+        return $this->itemResponse((new AddressIndexService($this->allowedIncludes, $this->allowedFilters, $this->allowedSorts))->execute());
     }
 }

@@ -15,6 +15,9 @@ class OrderUpdateService{
     {
         $this->request = $request;
         $this->order = Order::where('id', $request->id)->firstOrFail();
+        if($this->order->status_id == 3){
+            throw new Exception('Cannot update after an order is cancelled', 403);
+        }
     }
 
     

@@ -6,6 +6,7 @@ use App\Address;
 use App\Customer;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class CustomerIndexService{
     protected $allowedIncludes =[];
@@ -19,7 +20,8 @@ class CustomerIndexService{
         $this->allowedSorts = $allowedSorts;
     }
 
-    public function execute() : Paginator{
-        return QueryBuilder::for(Customer::class)->select('customers.*')->with(['address','orders'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters)->allowedSorts($this->allowedSorts)->simplePaginate();
+    public function execute() : Collection{
+        
+        return QueryBuilder::for(Customer::class)->select('customers.*')->with(['address', 'orders','orders.items','orders.assignee', 'orders.status'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters)->allowedSorts($this->allowedSorts)->get();
     }
 }

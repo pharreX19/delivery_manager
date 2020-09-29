@@ -1,11 +1,11 @@
 <?php
-namespace App\Domain\Customer;
+namespace App\Domain\Comment;
 
-use App\Customer;
+use App\Comment;
 
-class CustomerCreateService{
+class CommentCreateService{
 
     public function execute(array $validatedRequest) {
-        return Customer::create($validatedRequest);
+        return Comment::create($validatedRequest);
     }
 }

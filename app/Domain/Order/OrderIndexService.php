@@ -3,6 +3,7 @@ namespace App\Domain\Order;
 
 use App\Order;
 use Illuminate\Contracts\Pagination\Paginator;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class OrderIndexService{
@@ -22,6 +23,6 @@ class OrderIndexService{
         // return $orders;
         // dd($orders->load('address.customer'));
         // return $orders->load('address.customer');
-        return QueryBuilder::for(Order::class)->select('orders.*')->with(['assignee', 'item' ,'status','customer.address'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters)->allowedSorts($this->allowedSorts)->simplePaginate();
+        return QueryBuilder::for(Order::class)->select('orders.*')->with(['assignee', 'items' ,'status','orderAddress.address','orderCustomer.customer', 'comments'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters,  AllowedFilter::exact('orderCustomer.customer.name'))->allowedSorts($this->allowedSorts)->paginate(15);
     }
 }

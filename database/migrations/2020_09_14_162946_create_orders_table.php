@@ -15,18 +15,21 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('quantity')->default(1);
+            // $table->integer('quantity')->default(1);
             $table->unsignedBigInteger('staff_id')->nullable();
-            $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('item_id');
+            // $table->unsignedBigInteger('customer_id');
+            // $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('status_id')->default(1);
             $table->unsignedBigInteger('store_id')->nullable();
+            $table->unsignedBigInteger('address_customer_id');
+            // $table->float('price');
 
             $table->foreign('staff_id')->references('id')->on('staff')->onDelete('cascade');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            // $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
+            // $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
+            $table->foreign('address_customer_id')->references('id')->on('address_customers')->onDelete('cascade');
 
             $table->timestamps();
         });

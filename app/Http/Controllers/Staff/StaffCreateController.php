@@ -11,17 +11,18 @@ class StaffCreateController extends Controller{
     public function __invoke(StaffCreateRequest $request, StaffCreateService $staffCreateService)
     {
         try{
-            $staffCreateService->execute($request->validated());
+            $staff = $staffCreateService->execute($request->validated());
             return response()->json([
                 'object' => 'staff',
                 'success_code' => 200,
-                'success_message' => 'Staff Created Sucess'
+                'success_message' => 'Staff Created Sucess',
+                'data' => $staff
             ], 200);
         }catch(Exception $e){
             return response()->json([
                 'object' => 'staff',
-                'fail_code' => 422,
-                'fail_message' => $e
+                'failure_code' => 500,
+                'failure_message' => $e ?? 'Unexpected Error'
             ], 422);
         }
     }

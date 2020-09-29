@@ -53,6 +53,11 @@ class AddressCreateRequest extends FormRequest
                 'nullable',
                 'max:50',
                 'alpha_spaces'
+            ],
+            'customer_id' => [
+                'numeric',
+                'required',
+                'exists:customers,id'
             ]
         ];
     }

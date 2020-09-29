@@ -12,16 +12,16 @@ class LoginController extends Controller
 {
     public function __invoke(LoginRequest $loginRequest, LoginService $loginService)
     {
-        if($loginService->execute($loginRequest)){
+        if($user = $loginService->execute($loginRequest)){
             return response()->json([
-                'access_token' => Auth::user(),
+                'access_token' => $user,
                 'token_type' => 'bearer',
                 'expires_in' => Auth::factory()->getTTL() * 60
             ], 200);
         }
         return response()->json([
-            'failure_code' => 302,
-            'failure_message' => 'Login Failed'
-        ], 301);
+            'failure_code' => 422,
+            'failure_message' => 'Name and/or password is incorrect'
+        ], 422);
     }
 }

@@ -20,8 +20,8 @@ class StoreUpdateController extends Controller{
         }catch(Exception $e){
             return response()->json([
                 'object' => 'Store',
-                'fail_code' => '404',
-                'fail_message' => $e
+                'failure_code' => '404',
+                'failure_message' => $e
             ], 500);
         }
     }

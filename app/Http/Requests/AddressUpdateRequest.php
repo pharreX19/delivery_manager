@@ -53,6 +53,11 @@ class AddressUpdateRequest extends FormRequest
                 'nullable',
                 'max:50',
                 'alpha_spaces'
+            ],
+            'customer_id' => [
+                'numeric',
+                'sometimes',
+                'exists:customers,id'
             ]
         ];
     }

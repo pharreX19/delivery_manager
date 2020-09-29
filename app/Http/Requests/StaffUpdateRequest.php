@@ -28,10 +28,11 @@ class StaffUpdateRequest extends FormRequest
                 'sometimes',
                 'nullable',
                 'alpha_spaces',
-                'unique:staff,name',
+                'unique:staff,name,'.$this->id,
                 'max:30',
             ],
             'contact_no' => [
+                'unique:staff,contact_no,'.$this->id,
                 'sometimes',
                 'nullable',
                 'string',

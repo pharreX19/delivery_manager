@@ -10,11 +10,11 @@ class CustomerIndexController extends Controller
 {
     protected $allowedIncludes = [''];
     protected $allowedFilters = [''];
-    protected $allowedSorts = ['created_at', 'id'];
+    protected $allowedSorts = [''];
 
 
     public function __invoke(){
-        return $this->paginatedResponse((new CustomerIndexService($this->allowedIncludes, $this->allowedFilters, $this->allowedSorts))->execute());
+        return $this->itemResponse((new CustomerIndexService($this->allowedIncludes, $this->allowedFilters, $this->allowedSorts))->execute());
 
     }
 }

@@ -12,18 +12,19 @@ class ItemCreateController extends Controller{
     public function __invoke(ItemCreateRequest $request, ItemCreateService $itemCreateService)
     {
         try{
-            $itemCreateService->execute($request->validated());
+            $item = $itemCreateService->execute($request->validated());
             return response()->json([
                 'object' => 'item',
                 'success_code' => 200,
-                'success_message' => 'Item Created Sucess'
+                'success_message' => 'Item Created Sucess',
+                'data' => $item
             ], 200);
         }catch(Exception $e){
             return response()->json([
                 'object' => 'item',
-                'fail_code' => 422,
-                'fail_message' => $e
-            ], 422);
+                'failure_code' => 500,
+                'failure_message' => "Unexpected Error"
+            ], 500);
         }
     }
 }

@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Builder;
 
 
 class User extends Authenticatable implements JWTSubject
@@ -56,9 +57,15 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public function setPasswordAttribute($value){
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+
+    
     // protected static function booted(){
-    //     static::addGlobalScope('store', function(Builder $builder){
-    //         $builder->where('store_id', Auth::user()->store_id );
-    //     });
+        // static::addGlobalScope('store', function(Builder $builder){
+            // $builder->where('store_id', Auth::user()->store_id );
+        // });
     // }
 }
