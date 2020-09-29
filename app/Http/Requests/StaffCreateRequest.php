@@ -32,6 +32,7 @@ class StaffCreateRequest extends FormRequest
                 'max:30',
             ],
             'contact_no' => [
+                'unique:staff,contact_no',
                 'required',
                 'string',
                 'min:7',
@@ -45,11 +46,11 @@ class StaffCreateRequest extends FormRequest
                 'alpha_spaces',
                 'min:5'
             ],
-            'store_id' => [
-                'required',
-                'numeric',
-                'exists:store,id'
-            ]
+            // 'store_id' => [
+                // 'required',
+                // 'numeric',
+                // 'exists:store,id'
+            // ]
          ];
     }
 }

@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Item extends Model
 {
     use SoftDeletes;
+    const ITEM_DESCRIPTION = 'No Description for this item is found';
 
     protected $fillable = [
         'name',
@@ -24,10 +26,14 @@ class Item extends Model
         'deleted_at'
     ];
 
+    protected $attributes = [
+        'description' => SELF::ITEM_DESCRIPTION
+    ];
 
-    public function orders() : HasMany
+
+    public function orders() : BelongsToMany
     {
-        return $this->hasMany(Order::class);
+        return $this->belongsToMany(Order::class, 'item_orders');
     }
 
     public function store()

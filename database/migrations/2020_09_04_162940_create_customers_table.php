@@ -17,8 +17,8 @@ class CreateCustomersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('contact_no');
-            $table->unsignedBigInteger('address_id')->nullable();
-            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+            // $table->unsignedBigInteger('address_id')->nullable();
+            // $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
             $table->timestamps();
         });
     }

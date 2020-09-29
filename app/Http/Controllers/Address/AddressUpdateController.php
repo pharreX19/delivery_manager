@@ -20,8 +20,8 @@ class AddressUpdateController extends Controller{
         }catch(Exception $e){
             return response()->json([
                 'object' => 'item',
-                'fail_code' => '404',
-                'fail_message' => $e
+                'failure_code' => '404',
+                'failure_message' => $e
             ], 500);
         }
     }

@@ -19,6 +19,6 @@ class StaffIndexService{
     }
 
     public function execute() : Paginator{
-        return QueryBuilder::for(Staff::class)->select('staff.*')->with(['deliveries'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters)->allowedSorts($this->allowedSorts)->simplePaginate();
+        return QueryBuilder::for(Staff::class)->select('staff.*')->with(['deliveries'])->allowedIncludes($this->allowedIncludes)->allowedFilters($this->allowedFilters)->allowedSorts($this->allowedSorts)->paginate(15);
     }
 }

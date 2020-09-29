@@ -20,8 +20,8 @@ class StoreCreateController extends Controller{
         }catch(Exception $e){
             return response()->json([
                 'object' => 'Store',
-                'fail_code' => 422,
-                'fail_message' => $e
+                'failure_code' => 422,
+                'failure_message' => $e
             ], 422);
         }
     }

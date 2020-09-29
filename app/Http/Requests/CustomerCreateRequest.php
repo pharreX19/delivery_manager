@@ -36,11 +36,11 @@ class CustomerCreateRequest extends FormRequest
                 'max:20',
                 'min:7',
             ],
-            'address_id' => [
-                'numeric',
-                'exists:addresses,id',
-                'required'
-            ]
+            // 'address_id' => [
+                // 'numeric',
+                // 'exists:addresses,id',
+                // 'required'
+            // ]
         ];
     }
 }

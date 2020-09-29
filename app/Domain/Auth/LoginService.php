@@ -20,12 +20,14 @@ class LoginService{
             return false;
         }
         
-        $this->setToken($token);
-        return $this->respondWithToken($token);
+        $user = $this->setToken($token);
+        return $user;
+        // return true;
+        // return $this->respondWithToken($token);
     }
 
     private function setToken($token){
-        $user = User::find(auth()->user()->id);
+        $user = $this->getUser();
         $user->token = $token;
         $user->save();
         return $user;
@@ -38,8 +40,16 @@ class LoginService{
 
     public function logout()
     {
-        Auth::logout();
-        return response()->json(['message' => 'Successfully logged out']);
+        $user = $this->getUser();
+        $user->token = null;
+        $user->save();
+        return $user;
+        // Auth::logout();
+        // return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    private function getUser(){
+        return User::find(Auth::user()->id);
     }
 
     public function refresh()

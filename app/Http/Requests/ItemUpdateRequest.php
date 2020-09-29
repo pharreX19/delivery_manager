@@ -34,6 +34,7 @@ class ItemUpdateRequest extends FormRequest
                 'sometimes',
                 'nullable',
                 'string',
+                'unique:items,code,'.$this->id,
                 'max:30'
             ],
             'description' => [

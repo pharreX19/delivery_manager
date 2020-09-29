@@ -31,6 +31,7 @@ class ItemCreateRequest extends FormRequest
             ],
             'code' => [
                 'required',
+                'unique:items,code',
                 'string',
                 'max:30'
             ],

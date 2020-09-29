@@ -13,6 +13,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function paginatedResponse($paginatedData){
+        // dd($paginatedData instanceof LengthAwarePaginator);
         $reponse = [
             'data'=> $paginatedData->items(),
             'meta'=> [

@@ -12,18 +12,19 @@ class CustomerCreateController extends Controller{
     public function __invoke(CustomerCreateRequest $request, CustomerCreateService $customerCreateService)
     {
         try{
-            $customerCreateService->execute($request->validated());
+            $customer = $customerCreateService->execute($request->validated());
             return response()->json([
                 'object' => 'Customer',
                 'success_code' => 200,
-                'success_message' => 'Customer Created Sucess'
+                'success_message' => 'Customer Created Sucess',
+                'data' => $customer
             ], 200);
         }catch(Exception $e){
             return response()->json([
                 'object' => 'Customer',
-                'fail_code' => 422,
-                'fail_message' => $e
-            ], 422);
+                'failure_code' => 500,
+                'failure_message' => 'Unexpected Error'
+            ], 500);
         }
     }
 }
